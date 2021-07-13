@@ -13,7 +13,7 @@ export function getRandom<T>(minOrArray: number | Array<T>, max?: number, floati
     }
 }
 
-export function wait(ms: number) {
+export function wait(ms: number): Promise<void> {
     return new Promise(resolve => {
         setTimeout(resolve, ms)
     })
