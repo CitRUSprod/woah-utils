@@ -1,0 +1,100 @@
+{
+    "name": "woah-utils",
+    "version": "0.1.0",
+    "description": "Just useful utilities.",
+    "keywords": [
+        "woah",
+        "utils",
+        "utilities"
+    ],
+    "homepage": "https://github.com/CitRUSprod/woah-utils#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/CitRUSprod/woah-utils.git"
+    },
+    "license": "MIT",
+    "author": "CitRUS",
+    "main": "dist/main.js",
+    "types": "dist/main.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "node configs/estrella/dev",
+        "build": "node configs/estrella/prod && pnpm dts",
+        "dts": "dts-bundle-generator --no-banner --no-check -o dist/main.d.ts src/main.ts",
+        "validate": "tsc --noEmit",
+        "test": "jest --coverage",
+        "git:commit": "git-cz",
+        "prettier": "prettier --check",
+        "prettier:fix": "pnpm prettier -- --write",
+        "prettier:all": "pnpm prettier -- \"**/*.{md,json,yml,js,ts}\"",
+        "prettier:fix:all": "pnpm prettier:all -- --write",
+        "eslint": "eslint --color",
+        "eslint:fix": "pnpm eslint -- --fix",
+        "eslint:all": "pnpm eslint -- \"**/*.{js,ts}\"",
+        "eslint:fix:all": "pnpm eslint:all -- --fix",
+        "lint": "pnpm prettier:all && pnpm eslint:all",
+        "format": "pnpm prettier:fix:all && pnpm eslint:fix:all",
+        "ci": "pnpm validate && pnpm lint && pnpm test",
+        "prepare": "husky install",
+        "prepublishOnly": "pnpm build"
+    },
+    "lint-staged": {
+        "*.{md,json,yml,js,ts}": "pnpm prettier:fix",
+        "*.{js,ts}": "pnpm eslint:fix"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-customizable"
+        },
+        "cz-customizable": {
+            "config": "./configs/commits/commitizen.js"
+        }
+    },
+    "prettier": "./configs/prettier/index.js",
+    "eslintConfig": {
+        "extends": "./configs/eslint/index.js"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "\\$/(.*)": "<rootDir>/src/$1"
+        },
+        "preset": "ts-jest",
+        "setupFilesAfterEnv": [
+            "jest-extended"
+        ],
+        "testEnvironment": "node"
+    },
+    "devDependencies": {
+        "@citrus-linting/eslint-config": "0.15.0",
+        "@citrus-linting/prettier-config": "0.2.0",
+        "@commitlint/cli": "12.1.4",
+        "@types/jest": "26.0.24",
+        "@types/node": "16.3.1",
+        "@typescript-eslint/eslint-plugin": "4.28.3",
+        "@typescript-eslint/parser": "4.28.3",
+        "commitizen": "4.2.4",
+        "cz-customizable": "6.3.0",
+        "defu": "5.0.0",
+        "dts-bundle-generator": "5.9.0",
+        "esbuild-node-externals": "1.3.0",
+        "eslint": "7.30.0",
+        "eslint-config-prettier": "8.3.0",
+        "estrella": "1.4.1",
+        "husky": "7.0.1",
+        "inquirer": "8.1.1",
+        "jest": "27.0.6",
+        "jest-extended": "0.11.5",
+        "lint-staged": "11.0.1",
+        "prettier": "2.3.2",
+        "prettier-plugin-packagejson": "2.2.11",
+        "source-map-support": "0.5.19",
+        "ts-jest": "27.0.3",
+        "type-fest": "1.2.2",
+        "typescript": "4.3.5"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
