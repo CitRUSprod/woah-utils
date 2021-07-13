@@ -1,4 +1,4 @@
-import { getRandom, wait, getUniq } from "$/main"
+import { getRandom, wait, getUniq, isObject } from "$/main"
 
 import "jest-extended"
 
@@ -83,5 +83,24 @@ describe("getUniq function", () => {
         const uniqElements = [2, 4, 3, 9, 1, 6]
 
         expect(getUniq(arr)).toEqual(uniqElements)
+    })
+})
+
+describe("isObject function", () => {
+    test("should return true", () => {
+        expect(isObject({})).toBeTrue()
+        expect(isObject([])).toBeTrue()
+        expect(isObject(/1/)).toBeTrue()
+        expect(isObject(() => {})).toBeTrue()
+        expect(isObject(new Date())).toBeTrue()
+    })
+
+    test("should return false", () => {
+        expect(isObject("")).toBeFalse()
+        expect(isObject(1)).toBeFalse()
+        expect(isObject(true)).toBeFalse()
+        expect(isObject(null)).toBeFalse()
+        expect(isObject(undefined)).toBeFalse()
+        expect(isObject(Symbol("abc"))).toBeFalse()
     })
 })

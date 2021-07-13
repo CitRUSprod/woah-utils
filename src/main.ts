@@ -22,3 +22,8 @@ export function wait(ms: number) {
 export function getUniq<T>(array: Array<T>) {
     return Array.from(new Set(array))
 }
+
+export function isObject(value: unknown) {
+    const type = typeof value
+    return value !== null && (type === "object" || type === "function")
+}

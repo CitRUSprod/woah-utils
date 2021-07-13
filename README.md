@@ -45,3 +45,21 @@ import { getUniq } from "woah-utils"
 const uniqElements = getUniq([2, 4, 3, 9, 3, 1, 1, 2, 2, 6]) // get an array of unique elements
 console.log(uniqElements) // => [2, 4, 3, 9, 1, 6]
 ```
+
+### getUniq
+
+```typescript
+import { isObject } from "woah-utils"
+
+// check if a value is the language type of Object
+
+console.log(isObject({})) // => true
+console.log(isObject([])) // => true
+console.log(isObject(() => {})) // => true
+console.log(isObject(new Date())) // => true
+
+console.log(isObject("")) // => false
+console.log(isObject(1)) // => false
+console.log(isObject(null)) // => false
+console.log(isObject(undefined)) // => false
+```
