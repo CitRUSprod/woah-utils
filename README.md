@@ -12,7 +12,7 @@ npm add woah-utils
 
 ### getRandom
 
-```typescript
+```javascript
 import { getRandom } from "woah-utils"
 
 const integer = getRandom(1, 10) // get any integer from 1 to 10
@@ -27,7 +27,7 @@ console.log(element) // => "b"
 
 ### wait
 
-```typescript
+```javascript
 import { wait } from "woah-utils"
 
 async function fn() {
@@ -39,16 +39,16 @@ async function fn() {
 
 ### getUniq
 
-```typescript
+```javascript
 import { getUniq } from "woah-utils"
 
 const uniqElements = getUniq([2, 4, 3, 9, 3, 1, 1, 2, 2, 6]) // get an array of unique elements
 console.log(uniqElements) // => [2, 4, 3, 9, 1, 6]
 ```
 
-### getUniq
+### isObject
 
-```typescript
+```javascript
 import { isObject } from "woah-utils"
 
 // check if a value is the language type of Object
