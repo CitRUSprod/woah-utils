@@ -13,4 +13,4 @@ const devConfig = {
     inject: [path.join(__dirname, "source-map-support.js")]
 }
 
-estrella.build(defu(baseConfig, devConfig))
+estrella.build(defu(devConfig, baseConfig))

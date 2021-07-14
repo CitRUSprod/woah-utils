@@ -14,7 +14,9 @@
     },
     "license": "MIT",
     "author": "CitRUS",
+    "sideEffects": false,
     "main": "dist/index.js",
+    "module": "dist/index.es.js",
     "types": "dist/index.d.ts",
     "files": [
         "dist"
