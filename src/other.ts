@@ -13,17 +13,12 @@ export function getRandom<T>(minOrArray: number | Array<T>, max?: number, floati
     }
 }
 
-export function wait(ms: number): Promise<void> {
-    return new Promise(resolve => {
-        setTimeout(resolve, ms)
-    })
-}
-
 export function getUniq<T>(array: Array<T>) {
     return Array.from(new Set(array))
 }
 
-export function isObject(value: unknown) {
-    const type = typeof value
-    return value !== null && (type === "object" || type === "function")
+export function wait(ms: number): Promise<void> {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms)
+    })
 }

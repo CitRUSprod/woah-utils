@@ -14,15 +14,15 @@
     },
     "license": "MIT",
     "author": "CitRUS",
-    "main": "dist/main.js",
-    "types": "dist/main.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
         "dev": "node configs/estrella/dev",
         "build": "node configs/estrella/prod && pnpm dts",
-        "dts": "dts-bundle-generator --no-banner --no-check -o dist/main.d.ts src/main.ts",
+        "dts": "dts-bundle-generator --no-banner --no-check -o dist/index.d.ts src/index.ts",
         "validate": "tsc --noEmit",
         "test": "jest --coverage",
         "git:commit": "git-cz",
@@ -79,6 +79,7 @@
         "defu": "5.0.0",
         "dts-bundle-generator": "5.9.0",
         "esbuild-node-externals": "1.3.0",
+        "esbuild-plugin-clean": "0.1.3",
         "eslint": "7.30.0",
         "eslint-config-prettier": "8.3.0",
         "estrella": "1.4.1",

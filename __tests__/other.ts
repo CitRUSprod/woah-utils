@@ -1,4 +1,4 @@
-import { getRandom, wait, getUniq, isObject } from "$/main"
+import { getRandom, getUniq, wait } from "$/other"
 
 import "jest-extended"
 
@@ -55,23 +55,6 @@ describe("getRandom function", () => {
     })
 })
 
-describe("wait function", () => {
-    test("should return promise", () => {
-        expect(wait(1000)).toResolve()
-    })
-
-    test("should wait 1 second", async () => {
-        const second = 1000
-        const diff = 10
-        const startTime = Date.now()
-        await wait(second)
-        const time = Date.now() - startTime
-
-        expect(time).toBeGreaterThanOrEqual(second - diff)
-        expect(time).toBeLessThanOrEqual(second + diff)
-    })
-})
-
 describe("getUniq function", () => {
     const arr = [2, 4, 3, 9, 3, 1, 1, 2, 2, 6]
 
@@ -86,21 +69,19 @@ describe("getUniq function", () => {
     })
 })
 
-describe("isObject function", () => {
-    test("should return true", () => {
-        expect(isObject({})).toBeTrue()
-        expect(isObject([])).toBeTrue()
-        expect(isObject(/1/)).toBeTrue()
-        expect(isObject(() => {})).toBeTrue()
-        expect(isObject(new Date())).toBeTrue()
+describe("wait function", () => {
+    test("should return promise", () => {
+        expect(wait(1000)).toResolve()
     })
 
-    test("should return false", () => {
-        expect(isObject("")).toBeFalse()
-        expect(isObject(1)).toBeFalse()
-        expect(isObject(true)).toBeFalse()
-        expect(isObject(null)).toBeFalse()
-        expect(isObject(undefined)).toBeFalse()
-        expect(isObject(Symbol("abc"))).toBeFalse()
+    test("should wait 1 second", async () => {
+        const second = 1000
+        const diff = 10
+        const startTime = Date.now()
+        await wait(second)
+        const time = Date.now() - startTime
+
+        expect(time).toBeGreaterThanOrEqual(second - diff)
+        expect(time).toBeLessThanOrEqual(second + diff)
     })
 })
