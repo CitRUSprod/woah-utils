@@ -15,6 +15,12 @@
     "license": "MIT",
     "author": "CitRUS",
     "sideEffects": false,
+    "exports": {
+        ".": {
+            "require": "./dist/index.js",
+            "import": "./dist/index.es.js"
+        }
+    },
     "main": "dist/index.js",
     "module": "dist/index.es.js",
     "types": "dist/index.d.ts",
