@@ -1,3 +1,4 @@
+const fs = require("fs/promises")
 const path = require("path")
 const estrella = require("estrella")
 const defu = require("defu")
@@ -13,11 +14,25 @@ const prodConfig = {
 const cjsConfig = defu(prodConfig, baseConfig)
 const esmConfig = defu(
     {
-        outfile: path.join(__dirname, "../../dist/index.es.js"),
+        outfile: path.join(__dirname, "../../dist/esm/index.js"),
         format: "esm"
     },
     cjsConfig
 )
 
-estrella.build(cjsConfig)
-estrella.build(esmConfig)
+esmConfig.plugins = esmConfig.plugins.filter(p => p.name !== "esbuild:clean")
+
+async function start() {
+    await estrella.build(cjsConfig)
+    await fs.writeFile(
+        path.join(__dirname, "../../dist/cjs/package.json"),
+        JSON.stringify({ type: "commonjs" })
+    )
+    await estrella.build(esmConfig)
+    await fs.writeFile(
+        path.join(__dirname, "../../dist/esm/package.json"),
+        JSON.stringify({ type: "module" })
+    )
+}
+
+start()
