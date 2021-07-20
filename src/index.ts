@@ -67,3 +67,12 @@ export async function runMultiThreading<T>(fns: Array<() => Promise<T>>, threadC
 
     return result
 }
+
+export async function wrapPromise<T>(promise: Promise<T>): Promise<[T, null] | [null, unknown]> {
+    try {
+        const result = await promise
+        return [result, null]
+    } catch (err: unknown) {
+        return [null, err]
+    }
+}

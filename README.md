@@ -13,6 +13,7 @@ npm add woah-utils
 1. [runMultiThreading](#runmultithreading)
 2. [setAdvancedInterval](#setadvancedinterval)
 3. [wait](#wait)
+4. [wrapPromise](#wrappromise)
 
 ## Usage
 
@@ -96,5 +97,29 @@ async function fn() {
     // code
     await woah.wait(5000) // wait 5 seconds
     // code
+}
+```
+
+### wrapPromise
+
+```javascript
+import * as woah from "woah-utils"
+
+// wrap promise to avoid try-catch hell
+
+async function getOne(error = false) {
+    await woah.wait(500)
+    if (error) throw new Error("Just error")
+    return 1
+}
+
+async function fn() {
+    const [data, err] = await woah.wrapPromise(fn())
+    console.log(data) // => 1
+    console.log(err) // => null
+
+    const [data, err] = await woah.wrapPromise(fn(true))
+    console.log(data) // => null
+    console.log(err) // => Error
 }
 ```

@@ -1,4 +1,4 @@
-import { runMultiThreading, setAdvancedInterval, wait } from "$/index"
+import { runMultiThreading, setAdvancedInterval, wait, wrapPromise } from "$/index"
 
 import "jest-extended"
 
@@ -36,6 +36,7 @@ describe("runMultiThreading function", () => {
 
     test("should return array of results", async () => {
         const result = await runMultiThreading(fns, 2)
+
         expect(result).toEqual([3, 2, 8, 1, 7, 0, 4])
     })
 
@@ -62,18 +63,21 @@ describe("setAdvancedInterval function", () => {
 
     test("should be function", () => {
         clearAdvancedInterval = setAdvancedInterval(handler, 200)
+
         expect(clearAdvancedInterval).toBeFunction()
     })
 
     test("should be called 5 times", async () => {
         clearAdvancedInterval = setAdvancedInterval(handler, 200)
         await wait(1100)
+
         expect(handler.mock.calls.length).toBe(5)
     })
 
     test("should be called 6 times", async () => {
         clearAdvancedInterval = setAdvancedInterval(handler, 200, true)
         await wait(1100)
+
         expect(handler.mock.calls.length).toBe(6)
     })
 })
@@ -92,5 +96,33 @@ describe("wait function", () => {
 
         expect(time).toBeGreaterThanOrEqual(second - diff)
         expect(time).toBeLessThanOrEqual(second + diff)
+    })
+})
+
+describe("wrapPromise function", () => {
+    async function fn(error = false) {
+        await wait(500)
+
+        if (error) throw new Error("Just error")
+
+        return 1
+    }
+
+    test("should return promise", () => {
+        expect(wrapPromise(fn())).toResolve()
+    })
+
+    test("should return 1 and null", async () => {
+        const [data, err] = await wrapPromise(fn())
+
+        expect(data).toBe(1)
+        expect(err).toBeNull()
+    })
+
+    test("should return null and error", async () => {
+        const [data, err] = await wrapPromise(fn(true))
+
+        expect(data).toBeNull()
+        expect(err).toBeInstanceOf(Error)
     })
 })
