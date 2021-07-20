@@ -10,10 +10,42 @@ npm add woah-utils
 
 ## List of utilities
 
-1. [setAdvancedInterval](#setadvancedinterval)
-2. [wait](#wait)
+1. [runMultiThreading](#runmultithreading)
+2. [setAdvancedInterval](#setadvancedinterval)
+3. [wait](#wait)
 
 ## Usage
+
+### runMultiThreading
+
+```javascript
+import * as woah from "woah-utils"
+
+// run multi threading the specified number of threads
+
+async function fn() {
+    // code
+    const result = await woah.runMultiThreading(
+        [
+            async () => {
+                await woah.wait(500)
+                return 3
+            },
+            async () => {
+                await woah.wait(1000)
+                return 2
+            },
+            async () => {
+                await woah.wait(2000)
+                return 8
+            }
+        ],
+        2
+    )
+    console.log(result) // => [3, 2, 8]
+    // code
+}
+```
 
 ### setAdvancedInterval
 

@@ -1,6 +1,52 @@
-import { setAdvancedInterval, wait } from "$/index"
+import { runMultiThreading, setAdvancedInterval, wait } from "$/index"
 
 import "jest-extended"
+
+describe("runMultiThreading function", () => {
+    const fns = [
+        async () => {
+            await wait(500)
+            return 3
+        },
+        async () => {
+            await wait(1000)
+            return 2
+        },
+        async () => {
+            await wait(2000)
+            return 8
+        },
+        async () => {
+            await wait(500)
+            return 1
+        },
+        async () => {
+            await wait(200)
+            return 7
+        },
+        async () => {
+            await wait(1500)
+            return 0
+        },
+        async () => {
+            await wait(800)
+            return 4
+        }
+    ]
+
+    test("should return array of results", async () => {
+        const result = await runMultiThreading(fns, 2)
+        expect(result).toEqual([3, 2, 8, 1, 7, 0, 4])
+    })
+
+    test("should be faster than via Promise.all", async () => {
+        const startTime = Date.now()
+        await runMultiThreading(fns, 2)
+        const time = Date.now() - startTime
+
+        expect(time).toBeLessThan(5300)
+    })
+})
 
 describe("setAdvancedInterval function", () => {
     let handler: jest.Mock

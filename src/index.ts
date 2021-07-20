@@ -46,3 +46,24 @@ export function setAdvancedInterval(
 
     return clearAdvancedInterval
 }
+
+export async function runMultiThreading<T>(fns: Array<() => Promise<T>>, threadCount = 1) {
+    const result: Array<T> = []
+    let index = 0
+
+    async function run() {
+        result[index] = await fns[index]()
+        index++
+        if (index < fns.length) await run()
+    }
+
+    const promises: Array<Promise<void>> = []
+
+    for (let i = 0; i < threadCount; i++) {
+        promises.push(run())
+    }
+
+    await Promise.all(promises)
+
+    return result
+}
