@@ -105,13 +105,13 @@ async function fn() {
 ```javascript
 import * as woah from "woah-utils"
 
-// wrap promise to avoid try-catch hell
-
 async function getOne(error = false) {
     await woah.wait(500)
     if (error) throw new Error("Just error")
     return 1
 }
+
+// wrap promise to avoid try-catch hell
 
 async function fn() {
     const [data, err] = await woah.wrapPromise(getOne())
