@@ -114,11 +114,11 @@ async function getOne(error = false) {
 }
 
 async function fn() {
-    const [data, err] = await woah.wrapPromise(fn())
+    const [data, err] = await woah.wrapPromise(getOne())
     console.log(data) // => 1
     console.log(err) // => null
 
-    const [data, err] = await woah.wrapPromise(fn(true))
+    const [data, err] = await woah.wrapPromise(getOne(true))
     console.log(data) // => null
     console.log(err) // => Error
 }
