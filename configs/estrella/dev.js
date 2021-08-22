@@ -3,6 +3,7 @@ const estrella = require("estrella")
 const defu = require("defu")
 const baseConfig = require("./base")
 
+/** @type {import("estrella").BuildConfig} */
 const devConfig = {
     watch: true,
     sourcemap: "inline",
