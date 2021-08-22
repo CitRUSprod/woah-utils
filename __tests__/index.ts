@@ -37,7 +37,7 @@ describe("runMultiThreading function", () => {
     test("should return array of results", async () => {
         const result = await runMultiThreading(fns, 2)
 
-        expect(result).toEqual([3, 2, 8, 1, 7, 0, 4])
+        expect(result).toStrictEqual([3, 2, 8, 1, 7, 0, 4])
     })
 
     test("should be faster than via Promise.all", async () => {
@@ -71,14 +71,14 @@ describe("setAdvancedInterval function", () => {
         clearAdvancedInterval = setAdvancedInterval(handler, 200)
         await wait(1100)
 
-        expect(handler.mock.calls.length).toBe(5)
+        expect(handler.mock.calls).toHaveLength(5)
     })
 
     test("should be called 6 times", async () => {
         clearAdvancedInterval = setAdvancedInterval(handler, 200, true)
         await wait(1100)
 
-        expect(handler.mock.calls.length).toBe(6)
+        expect(handler.mock.calls).toHaveLength(6)
     })
 })
 
