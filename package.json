@@ -27,6 +27,9 @@
     "files": [
         "dist"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "dev": "node configs/estrella/dev",
         "build": "node configs/estrella/prod && pnpm dts",
@@ -44,9 +47,6 @@
         "prepare": "husky install",
         "prepublishOnly": "pnpm build"
     },
-    "lint-staged": {
-        "*.{md,json,y?(a)ml,js,ts}": "pnpm eslint:fix"
-    },
     "config": {
         "commitizen": {
             "path": "cz-customizable"
@@ -54,6 +54,9 @@
         "cz-customizable": {
             "config": "./configs/commits/commitizen.js"
         }
+    },
+    "lint-staged": {
+        "*.{md,json,y?(a)ml,js,ts}": "pnpm eslint:fix"
     },
     "prettier": "./configs/prettier/index.js",
     "eslintConfig": {
@@ -101,12 +104,8 @@
         "jest-extended": "0.11.5",
         "lint-staged": "11.1.2",
         "prettier": "2.3.2",
-        "prettier-plugin-packagejson": "2.2.11",
         "source-map-support": "0.5.19",
         "ts-jest": "27.0.5",
         "typescript": "4.3.5"
-    },
-    "publishConfig": {
-        "access": "public"
     }
 }
